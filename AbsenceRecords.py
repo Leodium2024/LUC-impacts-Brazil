@@ -2,6 +2,14 @@ import geopandas as gpd
 from shapely.geometry import Point
 import random
 
+#Pseudo-absence data resulting from a random sampling in areas with habitat unsuitable for the species. 
+#This method has been shown to be the most reliable for the logistic model, especially when using a large number of pseudo-absence data with equal weighting for presence and absence (51). Those recommendations were applied in this research and 1000 pseudo-absence data were randomly sampled in unsuitable areas. 
+#Expert species range maps were used to identify unsuitable areas
+
+########################################################################################
+##################     1) Generation of Pseudo-Absence records     #####################
+########################################################################################
+
 def generate_random_points_excluding_areas(study_area_shp, exclusion_areas_gpkg, output_shp, num_points):
     # Load the study area from the shapefile
     study_area_gdf = gpd.read_file(study_area_shp)
@@ -48,11 +56,16 @@ def generate_random_points_excluding_areas(study_area_shp, exclusion_areas_gpkg,
     points_gdf.to_file(output_shp, driver="ESRI Shapefile")
 
 # Example usage:
-study_area_shp = "C:/Users/Gerar007/Documents/Brazil/Data/Zone/State/Federal/Brazil.shp"
-exclusion_areas_gpkg = "C:/Users/Gerar007/Documents/Brazil/Data/Biodiversity/HSW_Mammalia/Brasil/HMW_Artiodactyla.gpkg"
-output_shp = "C:/Users/Gerar007/Documents/Brazil/Data/Biodiversity/HSW_Mammalia/RandomPoint/RandomPoint.shp" 
-num_points = 100
+study_area_shp = "Brazil.shp"
+exclusion_areas_gpkg = "HMW_Mammal.gpkg"
+output_shp = "Absence.shp" 
+num_points = 1000
 generate_random_points_excluding_areas(study_area_shp, exclusion_areas_gpkg, output_shp, num_points)
 
+########################################################################################
+##################     2) Extraction of environemental variables     ###################
+########################################################################################
+
+# Environmental Variable Extraction in ArcGIS: Using the generated SHP file in ArcGIS to extract environmental variable values for each species absence record.
 
 
