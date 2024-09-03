@@ -102,8 +102,6 @@ def get_raster_combi(raster1, raster2):
     return combi
 
 
-
-
 # Output and input directory
 resultsDir = r'E:/Brazil/Model/Carbon/Output/Result_priliminaire'
 Biome_directory = r'E:/Brazil/Data/Zone/Biome/Biome_reprojected'
@@ -113,14 +111,9 @@ ID_directory=r'E:/Brazil/Data/Land use/Bezera/ID_reprojected'
 Biome_reclass_path = r'E:/Brazil/Model/Carbon/Input/Biome_reclass.txt'
 
 
-
-
-
 dfs = []
 
-
-
-for i in range(0 , 35): # Brasil divided into 36 array
+for i in range(0 , 36): # Brasil divided into 36 array
     if i not in [0, 1, 4, 5, 6, 7, 11, 12, 17, 34, 35]: #blank array
        print (i)
        
