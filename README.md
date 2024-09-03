@@ -11,7 +11,9 @@
 
 4. Inputs
 
+Missing input: Species ranges maps, and land use projections
 
 5. Output
+
 
 
