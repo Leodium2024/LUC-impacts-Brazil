@@ -1,4 +1,4 @@
-# Land-use-change-impacts
+# LUC impacts Brazil
 
 1. Introduction
 
