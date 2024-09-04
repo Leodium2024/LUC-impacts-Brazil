@@ -57,7 +57,9 @@ def Get_Year_NetCDF (Scenario,lu,year):
     """ Upload of the LU layer for a specific LU and year
     Scenario is the path leading to the .nc file 
     lu is the name of the land use type to be extracted (string)
-    Year to be extracted (int)"""
+    Year to be extracted (int)
+    The land use "pastp" need to be caluclated based on the other land use
+    """
     data = np.zeros((464, 544))
     if lu == 'pastp': 
         # In the nc provided by Bezera et al. (2022), the layer pasture is the same than the layer Grassland
@@ -78,8 +80,7 @@ def Get_Year_NetCDF (Scenario,lu,year):
         data =data*mask
             # Replace the values in 'pastp' layer with the calculated data
         nc_file.variables['pastp'][year, :, :] = data
-        
-        
+           
     else:
         #If not pasture, read the netcdf as usual
         NetCDF = nc.Dataset(Scenario, 'r')
@@ -87,9 +88,6 @@ def Get_Year_NetCDF (Scenario,lu,year):
         data = Var[year,:,:]
         data =  0 + data
         data = np.nan_to_num(data, nan=0)
-    
-    
-    
     return data
 
 
@@ -223,7 +221,7 @@ def get_Fc (LU, StateBiome_Map):
   
 def get_SOC_ref (LU,ID_raster,SoilClim_Per):
     
-    ''' This function will return an array containing the SOCref for the different LU.
+    ''' This function will return an array containing the SOCref for a specific LU.
         For each cell the SOCref have been weighted by the proportion of each type of SoilClim.
         SoilClim is a dataframe contaning the proportion of each Soil climate type in every cells
         SOC is a dataframe containing the SOC reference value for each soil type combination snf Land use type
@@ -252,11 +250,12 @@ def get_SOC_ref (LU,ID_raster,SoilClim_Per):
     
     output = reclass_dataframe(summed_table,ID_raster,0,1)
 
-    
-
     return output        
 
 def get_SOC(sc, year, ClimSoil, StateBiome, ID, State) :
+
+    ''' This function will return a array containing the SOC for a specific year
+        and scenario'''
     
     Forest, Pasture, Forestry, Agriculture, Grassland, Other = get_lu(sc, year)
     
@@ -281,10 +280,13 @@ def get_SOC(sc, year, ClimSoil, StateBiome, ID, State) :
     
     SOC_Stock=SOC_Agri+SOC_Forest+SOC_Forestry+SOC_Grassland+SOC_Pasture
     
-    return SOC_Stock  # return le SOC of that year and sc
+    return SOC_Stock 
 
-def get_biomass_ref(LU, ID_raster, State_ID, BiomePhyto_per,Clim_raster):
-
+def get_biomass_ref(LU, ID_raster, State_ID, BiomePhyto_per, Clim_raster):
+    ''' This function will return an array containing the biomass ref for a specific LU.
+        For Grassland and forest, we used the MCTI ref values varying with the biome, phytophisiome and sometimes the the federal state.
+        For other land use, we took IPPC reference values
+    '''
     if LU in {'Forest','Grassland'}:
         
             merged = pd.merge(BiomePhyto_per, State_ID , how='left', left_on='ID', right_on='ID_cell')
@@ -327,12 +329,13 @@ def get_biomass_ref(LU, ID_raster, State_ID, BiomePhyto_per,Clim_raster):
         AGBmap= reclass_dataframe(ref,Clim_raster,0,1) 
         BGBmap= reclass_dataframe(ref,Clim_raster,0,2) 
         
-        
-
     return AGBmap,BGBmap 
 
 def get_biomass(sc, year, Clim_raster, BiomePhyto_per, State_ID, ID, State):
         
+    ''' This function will return a array containing the Biomass carbon for a specific year
+        and scenario'''
+    
         Forest, Pasture, Forestry, Agriculture, Grassland, Other = get_lu(sc, year)
         
         #Agriculture
@@ -357,7 +360,11 @@ def get_biomass(sc, year, Clim_raster, BiomePhyto_per, State_ID, ID, State):
         return Bio_stock    
 
 def Calculate_Carbon(sc,Years):
-   
+
+    ''' This function will return dictionaries containing arrays of the total Carbon stock, Biomass carbon stock
+        SOC stock across the land use projections. 
+        It also a dataframe with the total Carbon stock, biomass carbon and SOC for the study area '''
+    
     ID = rasterToArray(os.path.join(inputDir,'Carbon','ID_cell_Albers.tif')) #Table with the ID of each cell
     State = rasterToArray( os.path.join(inputDir,'State_Albers.tif')) 
     #Input data SOC
@@ -402,9 +409,9 @@ def Calculate_Carbon(sc,Years):
 ########################################################################################
 
 def get_perfomant_ottid(Performance):
+    ''' This function select the SDMs to be included and return the corresponding ott_id '''
     
     Performance=Performance[(Performance['N_Pre'] >=10)]  #More than 10 records
-    #Performance=Performance[(Performance['N_Abs'] >=2000)]  #More than 10 records
     Performance=Performance[(Performance['NNI'] >=0.5)]   #Not clustered records
     Performance=Performance[(Performance['AUC'] >=0.8)]   #AUC >= 0.8
     Performance=Performance[(Performance['TSS'] >=0.6)]   #TSS >= 0.6
@@ -413,6 +420,8 @@ def get_perfomant_ottid(Performance):
 
 def get_distribution_map(Species_ID, Coeficient, Performance, land_use, env):
     
+    ''' This function dtermine the distribution area of a species based on the
+        the logistic regression coeficient, land use and envrionmental variables'''
     
     #Upload of the range of the species
     Species_range_directory = os.path.join(inputDir,'Biodiversity','Species_Range')
@@ -460,6 +469,8 @@ def get_distribution_map(Species_ID, Coeficient, Performance, land_use, env):
 
 def get_N_SR_WE_CWE (sc, year, Coeficient, Performance, env, Ott_id, Order):
     
+   ''' This function calculate  N,SR,WE and CWE for a specific year and scenario'''
+    
     #Upload of land use variable for a specific year into a dictionary
     Forest, Pasture, Forestry, Agriculture, Grassland, Other = get_lu(sc,year)
     land_use = {'Agriculture': Agriculture,'Forest': Forest,'Forestry': Forestry,'Other': Other,'Pasture': Pasture,'Grassland': Grassland}
@@ -478,8 +489,6 @@ def get_N_SR_WE_CWE (sc, year, Coeficient, Performance, env, Ott_id, Order):
     SR['All'] = pd.DataFrame(0, index=range(464), columns=range(544))
     WE['All'] = pd.DataFrame(0, index=range(464), columns=range(544))
     CWE['All'] = pd.DataFrame(0, index=range(464), columns=range(544))
-    
-    
     
     for Species_ID in Ott_id:
         # Get species distribution map
@@ -518,11 +527,13 @@ def get_N_SR_WE_CWE (sc, year, Coeficient, Performance, env, Ott_id, Order):
         CWE[order] = WE[order] / SR[order].replace(0, np.nan)
         CWE[order] = CWE[order].fillna(0)  # Replace NaN values with 0
     
-    
     return N, SR, WE, CWE, distribution_areas
 
 
 def get_change_distribution_Area (TotalArea,Order,Years):
+    '''This function calculate the average distribution area of each mammals order
+    '''
+    
     #Dataframe to stock the change of distribution area for each species
     # Convert TotalArea to a DataFrame
     dataframe_area = pd.DataFrame(TotalArea)
@@ -539,26 +550,16 @@ def get_change_distribution_Area (TotalArea,Order,Years):
     
     # Calculate the average of the columns corresponding to the years for each order
     average = dataframe_area.groupby('Order')[year_columns].mean().reset_index()
-
-    '''
-    # Iterating over each year in Years (excluding '0') to calculate the difference
-    for year in Years:
-        if year != 0:
-            # Create a new column for each pair (0, year)
-            new_column_name = f"{year}-2015"
-            dataframe_area[new_column_name] = (dataframe_area[year] - dataframe_area[0])/dataframe_area[0]
-            
-    difference_columns = [f"{year}-2015" for year in Years if year !=0]
-    average_differences = dataframe_area.groupby('Order')[difference_columns].mean()
-    '''
-    
     
     return average
                         
         
            
 def Calculate_Biodiversity (sc, Years):
-
+     ''' This function will return dictionaries containing arrays of SR, WE, CWE across time for each mammal order. 
+        It also return a dictionaries with the number of species per order and time 
+        The average distribution areas of each order is also caluclated for each timestep and returned in a dataframe'''
+    
     #Upload of environemental variable into a dictionary
     Elevation=rasterToArray(os.path.join(inputDir,'Biodiversity','Elevation_Mean.tif'))
     Slope =rasterToArray(os.path.join(inputDir,'Biodiversity','Slope_Mean.tif'))
@@ -602,14 +603,10 @@ def Calculate_Biodiversity (sc, Years):
 ########################################################################################
 ########################################################################################
 
-
-
-
 def Calculate_Revenue (sc_path,sc,Years):
 
     Agri_Revenue = Revenue = pd.read_excel(os.path.join(inputDir,'Agriculture', 'Revenue.xlsx'),sheet_name='Agriculture')
     Beef_Revenue = Revenue = pd.read_excel(os.path.join(inputDir,'Agriculture', 'Revenue.xlsx'),sheet_name='Pasture')
-    
     
     #Output Data
     TotalRevenue = {}
@@ -638,10 +635,6 @@ def Calculate_Revenue (sc_path,sc,Years):
                                    index=['Cropland', 'Pasture', 'Total'])    
         
     return TotalRevenue,Evolution_Revenue
-
-
-
-
 
 
 ########################################################################################
@@ -699,15 +692,16 @@ scenariosDict = {}
 
 #Configuration of the model (you must turn on/turn off, depending of which part you want to run) 
 
-#1) Which type of impacts?
+#1) Which type of impacts should be estimated? (0=no, 1=Yes)
 CarbonComponent = 0
 BiodiveristyComponent = 1 
 AgricultureComponent = 0
 
-#2) Which scenarios?
+#2) Which scenarios? (0=no, 1=Yes)
 sc1 = 1
 sc2 = 1
 sc3 = 1
+
 if sc1 == 1:
     scenariosDict[1] = os.path.join(inputDir,'SSP1_RCP19_Albers.nc')
 if sc2 == 1:
@@ -715,7 +709,7 @@ if sc2 == 1:
 if sc3 == 1:
     scenariosDict[3] = os.path.join(inputDir,'SSP3_RCP70_Albers.nc')
     
-#3) Exporting/Ploting the result?
+#3) Exporting/Ploting the result? (0=no, 1=Yes)
 Export_result = 1 
 Plot_results = 1
 
@@ -781,7 +775,6 @@ for sc, sc_path in scenariosDict.items():
         Diff_WE = {order: WE[7][order] - WE[0][order]for order in mammals_orders}
         Diff_CWE = {order: CWE[7][order] - CWE[0][order] for order in mammals_orders}
         
-     
         if Export_result == 1:
             for order in mammals_orders:
                 # Export SR maps
@@ -823,8 +816,6 @@ for sc, sc_path in scenariosDict.items():
             plot_map_with_mask(Diff_SR['Chiroptera'], -10, 10, colors3, "Number of species", f'Change of SR for Chiroptera under scenario SSP{sc}')
             plot_map_with_mask(Diff_WE['Chiroptera'], -0.001, 0.001, colors3, "Number of species", f'Change of WE for Chiroptera under scenario SSP{sc}')
             plot_map_with_mask(Diff_CWE['Chiroptera'], -0.00001, 0.00001, colors3, "Number of species", f'Change of CWE for Chiroptera under scenario SSP{sc}')
-        
-        
 
     if AgricultureComponent == 1:
         
