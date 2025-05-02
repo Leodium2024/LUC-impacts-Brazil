@@ -32,11 +32,11 @@ Impacts:
  - Impact 2: Change in Mammal Species Richness (Nbr of species/ grid cell)
  - Impact 3: Change in Agricultural Revenues (USD/ha/year)
 
-Land use scenarios designed by Silva Bezerra et al., (2022):
+Land use scenarios designed by Silva Bezerra et al., (2022)(https://doi.org/10.1371/journal.pone.0256052):
  - SSP1-1.9
  - SSP2-4.5
  - SSP3-7.0
-(https://doi.org/10.1371/journal.pone.0256052)
+
 
 
 Script directory
