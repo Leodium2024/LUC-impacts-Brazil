@@ -9,7 +9,7 @@ Version: 1
 #  Create Input for objectives calculations
 # --------------------------------------------------  
 
-Land use map:
+Land use map:(!! input file have to be unzipped!!)
     => Extract all the land use map
     => Split the mosaic category
     => Split the cropland category
