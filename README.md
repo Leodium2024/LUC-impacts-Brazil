@@ -61,6 +61,7 @@ The input of the Biodiveristy model were generated using:
 - InputBiodiveristy1.R             # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
 - InputBiodiveristy2.py            # Create Pseudo-absence data
 - InputBiodiveristy3.R             # Calibrate and validate the SDMs
+These file can be found in the Premilinary_Input directory 
 
 
 
