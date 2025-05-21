@@ -43,9 +43,10 @@ Script
 -------------------------------------------------- 
 
 1) "Main.py, in which the following elements are calculated across the LU projection:
-    -  Carbon stock
-    -  Mammal Species Richness
-    -  Agricultural revenue
+    -  Change in Carbon stock across SSP1-1.9, SSP2-4.5, SSP3-7.0
+    -  Change in Mammal Species Richness across SSP1-1.9, SSP2-4.5, SSP3-7.0
+    -  Change in Agricultural revenue across SSP1-1.9, SSP2-4.5, SSP3-7.0
+    The output data are stored in the Output directory
     
 2) "Tool_functions.py", contains some functions called in other .py file
 
