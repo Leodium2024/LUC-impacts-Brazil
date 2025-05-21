@@ -39,10 +39,9 @@ Land use scenarios designed by Silva Bezerra et al., (2022)(https://doi.org/10.1
 
 
 
-Script directory
+Script
 -------------------------------------------------- 
 
-The 'Script'  directory contain all the following script:
 1) "Main.py, in which the following elements are calculated across the LU projection:
     -  Carbon stock
     -  Mammal Species Richness
@@ -58,7 +57,7 @@ The 'Script'  directory contain all the following script:
 
 Input directory
 -------------------------------------------------- 
-Contain all the necceassary input data
+Contain all the necceassary input data 
 
 With data to calculate the:
 - Biodiveristy objective stored in the Biodiveristy directory
@@ -72,7 +71,7 @@ The input of the Biodiveristy model were generated using:
 - InputBiodiveristy1.R             # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
 - InputBiodiveristy2.py            # Create Pseudo-absence data
 - InputBiodiveristy3.R             # Calibrate and validate the SDMs
-These file can be found in the Premilinary_Input directory 
+These files can be found in Premilinary_Input/Biodiveristy 
 
 
 
