@@ -56,32 +56,41 @@ Script
 
 
 Input directory
--------------------------------------------------- 
+------------------------------------------------------------------ 
 Contain all the necceassary input data to run the script in "Main.py", including: 
 
-- Input data to calculate changes in Species Richness stored in Input/Biodiveristy
-- Input data to calculate changes in carbon stock stored in Input/Carbon
-- Input data to calculate changes in agricultural revenue stored in Input/Economy
-- Land use projections under SSP1-1.9, SSP2-4.5 and SSP3-7.0 stored in Input_Land use
-
-These input data were created using "Create_input.py"
+- Input data to calculate changes in carbon stock stored in Input/Carbon (See Generation of Input: carbon Stock, Agricultural Revenue, Land-use)
+- Input data to calculate changes in agricultural revenue stored in Input/Economy (See Generation of Input: carbon Stock, Agricultural Revenue, Land-use)
+- Land use projections under SSP1-1.9, SSP2-4.5 and SSP3-7.0 stored in Input_Land use (See Generation of Input: carbon Stock, Agricultural Revenue, Land-use)
+- Input data to calculate changes in Species Richness stored in Input/Biodiveristy (See Generation of Input: Species Richness)
 
 
-Secondary data
--------------------------------------------------- 
-"Create_input.py" use the Secondary data to create the input data.
+Generation of Input: carbon Stock, Agricultural Revenue, Land-use
+------------------------------------------------------------------ 
+"Create_input.py" use Secondary data to create some input data.
 
-These secondary data are stored in Input/Preliminary_Input, as follow:
+The secondary data are stored in Input/Preliminary_Input, as follow:
 - Secondary data calculate changes in carbon stock stored in Preliminary_Input/Carbon
 - Secondary data to calculate changes in agricultural revenue stored in Preliminary_Input/Economy
-- Land use projections designed by Silva Bezerra et al., (2022) (https://doi.org/10.1371/journal.pone.0256052)
+- Land use projections designed by Silva Bezerra et al., (2022) (also available in: https://doi.org/10.1371/journal.pone.0256052)
 
 
-The input of the Biodiveristy model were generated using the following script: 
+Generation of Input: Species Richness
+------------------------------------------------------------------ 
+Performance.xlsx and Species_coef.xlsx, input of the Species Richness calculation, were generated using the following script: 
 - InputBiodiveristy1.R             # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
 - InputBiodiveristy2.py            # Create Pseudo-absence data
 - InputBiodiveristy3.R             # Calibrate and validate the SDMs
 These files can be found in Premilinary_Input/Biodiveristy.
+
+The input of InputBiodiveristy1.R  are available for download at: 
+
+The input of InputBiodiveristy2.R  are available for download at:
+
+The input of InputBiodiveristy3.R  are available for download at:
+
+
+
 
 
 
