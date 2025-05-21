@@ -32,7 +32,7 @@ Impacts:
  - Impact 2: Change in Mammal Species Richness (Nbr of species/ grid cell)
  - Impact 3: Change in Agricultural Revenues (USD/ha/year)
 
-Land use scenarios designed by Silva Bezerra et al., (2022)(https://doi.org/10.1371/journal.pone.0256052):
+Land use projections designed by Silva Bezerra et al., (2022)(https://doi.org/10.1371/journal.pone.0256052):
  - SSP1-1.9
  - SSP2-4.5
  - SSP3-7.0
@@ -57,21 +57,32 @@ Script
 
 Input directory
 -------------------------------------------------- 
-Contain all the necceassary input data 
+Contain all the necceassary input data to run the script in "Main.py", including: 
 
-With data to calculate the:
-- Biodiveristy objective stored in the Biodiveristy directory
-- Climate objective stored in the Climate directory
-- Economic objective stored in the Economic directory
+- Input data to calculate changes in Species Richness stored in Input/Biodiveristy
+- Input data to calculate changes in carbon stock stored in Input/Carbon
+- Input data to calculate changes in agricultural revenue stored in Input/Economy
+- Land use projections under SSP1-1.9, SSP2-4.5 and SSP3-7.0 stored in Input_Land use
 
-These input data were created using "Create_input.py", 
-which itslef use input data stored in the Premilinary_Input directory 
+These input data were created using "Create_input.py"
 
-The input of the Biodiveristy model were generated using: 
+
+Secondary data
+-------------------------------------------------- 
+"Create_input.py" use the Secondary data to create the input data.
+
+These secondary data are stored in Input/Preliminary_Input, as follow:
+- Secondary data calculate changes in carbon stock stored in Preliminary_Input/Carbon
+- Secondary data to calculate changes in agricultural revenue stored in Preliminary_Input/Economy
+- Land use projections designed by Silva Bezerra et al., (2022) (https://doi.org/10.1371/journal.pone.0256052)
+
+
+The input of the Biodiveristy model were generated using the following script: 
 - InputBiodiveristy1.R             # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
 - InputBiodiveristy2.py            # Create Pseudo-absence data
 - InputBiodiveristy3.R             # Calibrate and validate the SDMs
-These files can be found in Premilinary_Input/Biodiveristy 
+These files can be found in Premilinary_Input/Biodiveristy.
+
 
 
 
