@@ -13,19 +13,6 @@ Python Environement set-up:
 - matplotlib: 3.7.2
 - netCDF4: 1.6.2
 
-R Environement set-up:
-- CoordinateCleaner version: 3.0.1 
-- readxl version: 1.4.3 
-- writexl version: 1.5.0 
-- rotl version: 3.1.0 
-- spThin version: 0.2.0
-- caret version: 6.0.94 
-- pROC version: 1.18.5 
-- flexsdm version: 1.3.4 
-- sf version: 1.0.16 
-- spdep version: 1.3.4 
-- ROCR version: 1.0.11 
-- MASS version: 7.3.60.2 
 
 Impacts: 
  - Impact 1: Change in Land Carbon Stock (ton/ha)
