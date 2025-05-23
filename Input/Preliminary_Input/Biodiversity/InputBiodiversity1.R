@@ -17,7 +17,7 @@ library(sf)
 ########################################################################################
 ########################################################################################
 
-#This script is designed to clean and prepare data on species occurrence. 
+#This script is designed to clean and prepare data on species occurrence.Example for data from SLAVE 
 #The main output of the script is a list containing the coordinates, ott_id, and taxonomic order for each species occurrence record. 
 #Subsequently, environmental variable values associated with each coordinate are extracted using ArcGIS.
 
@@ -31,7 +31,7 @@ library(sf)
 #In this part, the occurence coordinate are cleaned using Coordinate cleaner (https://cran.r-project.org/web/packages/CoordinateCleaner/index.html)
 #Input: Original online database of species records (Here is an example for the SALVE online database)
 
-dat<- read_xlsx("SALVE.xlsx") #Import
+dat<- read_xlsx("SALVE.xlsx") #Import of initial data 1) SALVE.xlsx 2) GBIF.xlsx 3) CRIA.xlsx
 
 dat <- dat %>%filter(Ano >= 1990 & Ano <= 2022) #We only keep data between 1990 and 2022
 
@@ -69,7 +69,7 @@ dat_cl <- dat[flags$.summary,]
 dat_fl <- dat[!flags$.summary,]
 
 #Export of the cleaned file 
-write_xlsx(dat_cl,"SLAVE_CoordClean.xlsx")
+#write_xlsx(dat_cl,"SLAVE_CoordClean.xlsx")
 
 ########################################################################################
 ###########################     2) Taxonomic cleaning     ##############################
@@ -84,7 +84,8 @@ write_xlsx(dat_cl,"SLAVE_CoordClean.xlsx")
 
 
 #Import of data
-dat <- read_xlsx("SLAVE_CoordClean.xlsx")
+#dat <- read_xlsx("SLAVE_CoordClean.xlsx")
+dat <- dat_cl
 
 #Extract Taxa name as provided by the online database
 taxa <- as.list(dat[[2]])
@@ -169,8 +170,8 @@ merged_data <- merge( dat, resolved_names, by.x = "sciname", by.y = "unique_name
 merged_data <- merged_data[!duplicated(merged_data[, c("sciname", "Longitude", "Latitude","Ano")]), ]
 
 #Export
-write_xlsx(merged_data, "Salve_Final_rotl.xlsx")
-write_xlsx(resolved_names,"PresenceSALVE_Species.xlsx")  
+#write_xlsx(merged_data, "Salve_Final_rotl.xlsx")
+#write_xlsx(resolved_names,"PresenceSALVE_Species.xlsx")  
 
 
 ########################################################################################
@@ -183,7 +184,8 @@ write_xlsx(resolved_names,"PresenceSALVE_Species.xlsx")
 
 
 #Import of data 
-data <- read_xlsx("Salve_Final_rotl.xlsx")
+#data <- read_xlsx("Salve_Final_rotl.xlsx")
+data <- merged_data
 data <- data[!duplicated(data[, c("sciname", "Longitude", "Latitude")]), ]
 species_count <- data %>% group_by(Ott_id, sciname) %>% tally(name = "Occurrences")
 filtered_data <- data %>% semi_join(species_count %>% filter(Occurrences > 10), by = c("Ott_id", "sciname"))
