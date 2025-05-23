@@ -14,4 +14,4 @@ Contain all the necceassary input data to run the script in "Main.py", including
 	- Input data to calculate changes in Species Richness stored in "Input/Biodiveristy" 
 
 
-These data were generated using "Create_input.py", using data stroed in "Input/PreliminaryInput" 
+These data were generated using "Create_input.py", using data stored in "Input/PreliminaryInput" 
