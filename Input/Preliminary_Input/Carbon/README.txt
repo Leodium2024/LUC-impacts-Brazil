@@ -15,9 +15,9 @@ Other input data:
 
 	- Soil type and climate type for each cell: ID_CLimSoil_Subordem.xlsx  (IBGE, 2024, Alvares et al., 2013)
 
-	- Biome and  Phytoregion  for each cell: ID_BiomePhyto.xlsx  (MCTI, 2020; IBGE, 2022) 
+	- Biome and  Phytoregion  for each cell: ID_BiomePhyto.xlsx  (MCTI, 2020; IBGE, 2024) 
 
-	- File to desagragate the Mosaic and croplands: Percentage_agri_mos.xlsx  (MapBiomas Project, 2023b)
+	- File to desagragate the Mosaic and croplands: Percentage_agri_mos.xlsx  (MapBiomas Project, 2023b; IBGE, 2022)
 
 
 References:
