@@ -78,17 +78,17 @@ The secondary data are stored in Input/Preliminary_Input, as follow:
 
 Generation of Input: Species Richness
 ------------------------------------------------------------------ 
-Performance.xlsx and Species_coef.xlsx,i.e., input of the Species Richness calculation, were generated using the following script: 
-- InputBiodiveristy1.R             # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
-- InputBiodiveristy2.py            # Create Pseudo-absence data
-- InputBiodiveristy3.R             # Calibrate and validate the SDMs
-These files can be found in Premilinary_Input/Biodiveristy.
 
-The input of InputBiodiveristy1.R  are available for download at: 
+Performance.xlsx and Species_coef.xlsx,i.e., input of the Species Richness calculation, were generated using the following script:
 
-The input of InputBiodiveristy2.R  are available for download at:
+	- InputBiodiveristy1.R # Taxonomic and geographic cleaning of biodiveristy database + thinning (1 records per 10km)
+	
+	- InputBiodiveristy2.py # Create Pseudo-absence data
 
-The input of InputBiodiveristy3.R  are available for download at:
+	- InputBiodiveristy3.R # Calibrate and validate the SDMs These files can be found in Premilinary_Input/Biodiveristy.
+
+
+The input of these script can be downloaded at : 10.5281/zenodo.15497375
 
 
 
