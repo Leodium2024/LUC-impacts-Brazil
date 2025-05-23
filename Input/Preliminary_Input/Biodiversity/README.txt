@@ -20,8 +20,7 @@ The input of InputBiodiveristy1.R are :
 	- CRIA.Xlsx          data source: CRIA. (2024). SpeciesLink. https://specieslink.net/
 
 The input of InputBiodiveristy2.R are:
-	- HMW_Mammal.gpkg    data source: Marsh, C. J., Sica, Y. V., Burgin, C. J., Dorman, W. A., Anderson, R. C., del Toro Mijares, I., Vigneron, J. G., Barve, V., Dombrowik, V. L., Duong, M., Guralnick, R., Hart, J. A.,  Maypole, J. K., McCall, K., 						  Ranipeta, A., Schuerkmann, A., Torselli, M. A., Lacher, T., Mittermeier, R. A., … Jetz, W. (2022). Expert range maps of global mammal distributions harmonised to three taxonomic authorities. Journal of 
-                                          Biogeography, 49(5), 979–992. https://doi.org/10.1111/jbi.14330
+	- HMW_Mammal.gpkg    data source: Marsh, C. J., Sica, Y. V., Burgin, C. J., Dorman, W. A., Anderson, R. C., del Toro Mijares, I., Vigneron, J. G., Barve, V., Dombrowik, V. L., Duong, M., Guralnick, R., Hart, J. A.,  Maypole, J. K., McCall, K., Ranipeta, A., Schuerkmann, A., Torselli, M. A., Lacher, T., Mittermeier, R. A., … Jetz, W. (2022). Expert range maps of global mammal distributions harmonised to three taxonomic authorities. Journal of Biogeography, 49(5), 979–992. https://doi.org/10.1111/jbi.14330
 
 The input of InputBiodiveristy3.R are: 
 	- Presence.xlsx
