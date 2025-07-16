@@ -75,7 +75,7 @@ Performance.xlsx and Species_coef.xlsx,i.e., input of the Species Richness calcu
 	- InputBiodiveristy3.R # Calibrate and validate the SDMs These files can be found in Premilinary_Input/Biodiveristy.
 
 
-The input of these script can be downloaded at : 10.5281/zenodo.15497375
+The input of these script can be downloaded at : https://doi.org/10.5281/zenodo.15497375
 
 
 
