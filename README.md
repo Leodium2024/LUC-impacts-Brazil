@@ -1,8 +1,10 @@
-LUC impacts Brazil
+Trade-Offs and Synergies between Climate Change Mitigation, Biodiversity Preservation, and Agro-economic Development Across Future Land-Use Scenarios in Brazil.
 -------------------------------------------------- 
 Created on 02/05/2025
 @author: Thomas GERARD
 Version: 1
+
+This script provides a spatially explicit quantification of the impact of land-use change on carbon stocks, mammal species richness, and agricultural revenues in Brazil under three SSP-based land-use change scenarios.
 
 Python Environement set-up:
 - Python Version: 3.11.5
@@ -13,10 +15,9 @@ Python Environement set-up:
 - matplotlib: 3.7.2
 - netCDF4: 1.6.2
 
-
 Impacts: 
  - Impact 1: Change in Land Carbon Stock (ton/ha)
- - Impact 2: Change in Mammal Species Richness (Nbr of species/ grid cell)
+ - Impact 2: Change in Mammal Species Richness (Nbr of species/grid cell)
  - Impact 3: Change in Agricultural Revenues (USD/ha/year)
 
 Land use projections designed by Silva Bezerra et al., (2022)(https://doi.org/10.1371/journal.pone.0256052):
